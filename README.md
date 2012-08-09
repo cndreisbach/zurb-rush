@@ -1,6 +1,7 @@
-# Zurb::Rush
+zurb-rush
+=========
 
-TODO: Write a gem description
+Zurb Rush is a collection of helpers and a form builder for Zurb Foundation 3.
 
 ## Installation
 
@@ -18,7 +19,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### The Form Builder
+
+To start using the form builder, use the helper `foundation_form_for`.
+
+```erb
+<%= foundation_form_for @user do |f| %>
+  <%= f.input :username %>
+  <%= f.input :password %>
+  <%= f.button :submit %>
+<% end %>
+```
 
 ## Contributing
 

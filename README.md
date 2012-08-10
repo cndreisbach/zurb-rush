@@ -32,6 +32,51 @@ The Foundation grid is made up of rows and columns, which can be nested. You hav
     destroyed by madness, starving hysterical naked
   <% end %>
 <% end %>
+```
+
+### Alert Boxes and Flash Messages
+
+Rails flash messages can be easily shown using Foundation's alert boxes. Foundation's alert boxes use a different naming scheme than the standard flash messages, so they are mapped, like so:
+
+* Rails' `notice` -> Foundation's `success`
+* Rails' `alert` -> Foundation's `alert`
+* Rails' `info` -> Foundation's standard alert
+
+This is specifically because `redirect_to` allows you to pass a flash message with the `:notice` and `:alert` keys. `info` has been mapped so you can use the standard alert box, since `alert` has been taken.
+
+To display all your flash messages using Foundation's alerts, simply call `display_flash_messages`, like so:
+
+```erb
+
+<div id="header">
+  <%= display_flash_messages %>
+  ...
+</div>
+```
+
+If you want to show an alert box outside of the flash messages, you can simply call `alert_box`:
+
+```erb
+<%= alert_box "This is a standard alert." %>
+<%= alert_box :success, "This is a success alert." %>
+<%= alert_box :alert, "This is an alert." %>
+<%= alert_box :secondary, "This is a secondary alert." %>
+```
+
+### Labels
+
+Labels are inline styles that can be used to call out certain sections or to display metadata. Do not confuse them with form labels. It is super-confusing.
+
+```erb
+<%= label "Regular Label" %>
+<%= label :radius, "Radius Label" %>
+<%= label :round, "Round Label" %>
+<%= label :secondary, "Secondary Label" %>
+<%= label :alert, :radius, "Alert Label with a Radius" %>
+<%= label :success, :round, "Rounded Success Label" %>
+```
+
+
 
 ### The Form Builder
 

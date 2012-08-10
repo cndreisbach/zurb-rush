@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 require File.expand_path('../lib/zurb-rush/version', __FILE__)
 
 Gem::Specification.new do |gem|
@@ -14,6 +13,6 @@ Gem::Specification.new do |gem|
   gem.name          = "zurb-rush"
   gem.require_paths = ["lib"]
   gem.version       = ZurbRush::VERSION
-  gem.add_dependency 'foundation-rails', '~> 2.2.1'
-  gem.add_dependency 'actionpack', '~> 3.2.7'
+  gem.add_dependency 'zurb-foundation', '~> 3.0.1'
+  gem.add_dependency 'actionpack', '~> 3.2.1'
 end

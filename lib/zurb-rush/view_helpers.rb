@@ -21,7 +21,7 @@ module ZurbRush
       classes << columns
 
       if options[:mobile]
-        mobile_cols = options[:mobile]
+        mobile_cols = options.delete(:mobile)
         mobile_cols = mobile_cols.humanize if mobile_cols.respond_to?(:humanize)
         classes << "mobile-#{mobile_cols}"
       end
@@ -39,6 +39,20 @@ module ZurbRush
       content_tag :div, :class => add_to_class("alert-box", *classes) do
         raw(content + content_tag(:a, '&times;', {:href => '#', :class => 'close'}, false))
       end
+    end
+
+    def display_flash_messages
+      flash.inject "" do |message, (key, value)|
+        # Change to match up to Rails' flash expectations.
+        key = "success" if key.to_s == "notice"
+        message += alert_box(value, key)
+      end.html_safe
+    end
+
+    ## Labels
+
+    def label(content, *classes)
+      content_tag :span, content, :class => add_to_class("label", *classes)
     end
 
     private

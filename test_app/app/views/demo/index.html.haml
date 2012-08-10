@@ -1,0 +1,11 @@
+= row :class => 'header' do
+  %h1 Zurb Rush Demo
+= row do  
+  = columns 4 do
+    Sidebar
+  = columns 8 do
+    %h2 Alert Boxes
+    = alert_box "This is a standard alert."
+    = alert_box "This is a success alert.", :success
+    = alert_box "This is an alert.", :alert
+    = alert_box "This is a secondary alert.", :secondary

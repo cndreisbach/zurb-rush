@@ -14,5 +14,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = ZurbRush::VERSION
   gem.add_dependency 'zurb-foundation', '~> 3.0.1'
+  gem.add_dependency 'humanize', '~> 1.1.0'
   gem.add_dependency 'actionpack', '~> 3.2.1'
 end

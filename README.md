@@ -21,14 +21,14 @@ Or install it yourself as:
 
 ### The Grid
 
-The Foundation grid is made up of rows and columns, which can be nested. You have two helpers for these with the obvious names `row` and `column`. These accept any number of arguments, which will be converted into class names on the row or column. Symbols will become strings; in addition, symbols (and only symbols) that have underscores in them will have the underscores converted to hyphens, thereby allowing you to specify the class "mobile-three" with the symbol `:mobile_three`.
+The Foundation grid is made up of rows and columns, which can be nested. You have two helpers for these with the obvious names `row` and `column`. These accept any number of arguments, which will be converted into class names on the row or column.
 
 ```erb
 <%= row do %>
-  <%= column :four, :mobile_one do %>
+  <%= columns 4, :mobile => 1 do %>
     I saw the best minds of my generation
   <% end %>
-  <%= column :eight, :mobile_three do %>
+  <%= columns 8, :mobile => 3 do %>
     destroyed by madness, starving hysterical naked
   <% end %>
 <% end %>
@@ -48,19 +48,19 @@ To display all your flash messages using Foundation's alerts, simply call `displ
 
 ```erb
 
-<div id="header">
+<header>
   <%= display_flash_messages %>
   ...
-</div>
+</header>
 ```
 
 If you want to show an alert box outside of the flash messages, you can simply call `alert_box`:
 
 ```erb
 <%= alert_box "This is a standard alert." %>
-<%= alert_box :success, "This is a success alert." %>
-<%= alert_box :alert, "This is an alert." %>
-<%= alert_box :secondary, "This is a secondary alert." %>
+<%= alert_box "This is a success alert.", :success %>
+<%= alert_box "This is an alert.", :alert %>
+<%= alert_box "This is a secondary alert.", :secondary %>
 ```
 
 ### Labels
@@ -69,13 +69,12 @@ Labels are inline styles that can be used to call out certain sections or to dis
 
 ```erb
 <%= label "Regular Label" %>
-<%= label :radius, "Radius Label" %>
-<%= label :round, "Round Label" %>
-<%= label :secondary, "Secondary Label" %>
-<%= label :alert, :radius, "Alert Label with a Radius" %>
-<%= label :success, :round, "Rounded Success Label" %>
+<%= label "Radius Label", :radius %>
+<%= label "Round Label", :round %>
+<%= label "Secondary Label", :secondary %>
+<%= label "Alert Label with a Radius", :alert, :radius %>
+<%= label "Rounded Success Label", :success, :round %>
 ```
-
 
 
 ### The Form Builder
@@ -95,7 +94,7 @@ To start using the form builder, use the helper `foundation_form_for`.
 ```erb
 <%= foundation_form_for @user do |f| %>
   <%= f.input :username, :label => "Your name" %>
-  <%= f.input :address, :hint => "Where you live", :field => {:class => 'eight'} %>
+  <%= f.input :address, :hint => "Where you live", :field => {:columns => 8} %>
   <%= f.input :email, :as => :email, :placeholder => "you@example.com" %>
   <%= f.button :submit %>
 <% end %>
@@ -105,7 +104,9 @@ You can even use inline inputs:
 
 ```erb
 <%= foundation_form_for @user do |f| %>
-  <%= f.input :username, :inline => ['two mobile-one', 'ten mobile-three'] %>
+  <%= f.input :username, :inline => true,
+        :label => {:columns => 2, :mobile_columns => 1},
+        :field => {:columns => 10, :mobile_columns => 3} %>
 <% end %>
 ```
 
@@ -115,12 +116,12 @@ If you want to use Foundation forms, but need to separate the label and field, y
 <%= foundation_form_for @user do |f| %>
   <%= f.label :twitter %>
   <%= row do %>
-    <%= column :four do %>
-      <%= row :collapsed do %>
-        <%= column :two, :mobile_one do %>
+    <%= columns 4 do %>
+      <%= row :class => 'collapsed' do %>
+        <%= columns 2, :mobile => 1 do %>
           <span class="prefix">@</span>
         <% end %>
-        <%= column :ten, :mobile_three do %>
+        <%= column 10, :mobile => 3 do %>
           <%= f.field :twitter %>
         <% end %>
       <% end %>

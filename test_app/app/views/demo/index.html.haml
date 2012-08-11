@@ -2,18 +2,25 @@
   %h1 Zurb Rush Demo
 = row do  
   = columns 4, :mobile => 1 do
-    Sidebar
+    %ul.side-nav
+      %li= link_to "Flash Messages", "#flash-messages"
+      %li= link_to "Alert Boxes", "#alert-boxes"
+      %li= link_to "Labels", "#labels"
+    
   = columns 8, :mobile => 3 do
+    %a(name="flash-messages")
     %h2 Flash Messages
     %p= link_to "Click here to see some Rails flash messages.", "/set_flash"
     = display_flash_messages
-    
+
+    %a(name="alert-boxes")
     %h2 Alert Boxes
     = alert_box "This is a standard alert."
     = alert_box "This is a success alert.", :success
     = alert_box "This is an alert.", :alert
     = alert_box "This is a secondary alert.", :secondary
 
+    %a(name="labels")
     %h2 Labels
     %p
       = label "Standard Label"

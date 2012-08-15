@@ -1,5 +1,6 @@
 require 'action_view/helpers'
 require 'humanize'
+require 'zurb-rush/form_builder'
 
 module ZurbRush
   module ViewHelpers
@@ -17,6 +18,7 @@ module ZurbRush
 
     def columns(columns, options = {})
       classes = ['columns']
+
       columns = columns.humanize if columns.respond_to?(:humanize)
       classes << columns
 
@@ -42,17 +44,23 @@ module ZurbRush
     end
 
     def display_flash_messages
-      flash.inject "" do |message, (key, value)|
+      flash.inject "" do |messages, (key, value)|
         # Change to match up to Rails' flash expectations.
         key = "success" if key.to_s == "notice"
-        message += alert_box(value, key)
+        messages += alert_box(value, key)
       end.html_safe
     end
 
     ## Labels
 
-    def label(content, *classes)
+    def text_label(content, *classes)
       content_tag :span, content, :class => add_to_class("label", *classes)
+    end
+
+    ## Forms
+
+    def foundation_form_for(record, options = {}, &proc)
+      form_for record, {:builder => ZurbRush::FormBuilder}.merge(options), &proc
     end
 
     private

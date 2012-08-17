@@ -44,23 +44,24 @@ module ZurbRush
     end
 
     def display_flash_messages
-      flash.inject "" do |messages, (key, value)|
+      flash.inject "" do |message, (key, value)|
         # Change to match up to Rails' flash expectations.
         key = "success" if key.to_s == "notice"
-        messages += alert_box(value, key)
+        message += alert_box(value, key)
       end.html_safe
     end
 
     ## Labels
 
-    def text_label(content, *classes)
+    def label_box(content, *classes)
       content_tag :span, content, :class => add_to_class("label", *classes)
     end
 
     ## Forms
 
     def foundation_form_for(record, options = {}, &proc)
-      form_for record, {:builder => ZurbRush::FormBuilder}.merge(options), &proc
+      defaults = {:builder => ZurbRush::FormBuilder}
+      form_for(record, defaults.merge(options), &proc)
     end
 
     private

@@ -1,23 +1,26 @@
 module ZurbRush
   class FormBuilder < ActionView::Helpers::FormBuilder
-    def input(field, options = {})
-      field_map = {
-        /password/ => "password_field",
-        /email/ => "email_field",
-        /url/ => "url_field",
-        /phone/ => "phone_field",
-        /fax/ => "phone_field",
-        /./ => "text_field"
-      }
+    FIELD_MATCHERS = {
+      /password/ => :password,
+      /email/ => :email,
+      /phone/ => :phone,
+      /fax/ => :phone
+      /url/ => :url,
+      String => :text
+    }
 
-      matcher = options.delete(:as) || field
-      field_type = field_map.to_a.select { |k, v| k === matcher }.first[1]
-
+    def input(field_name, options = {})
       label_text = options.delete(:label)
+      label(field_name, label_text) + field(field_name, options)
+    end
 
-      #field_opts = {}
+    def field(field_name, options = {})
+      field_name = field_name.to_s
 
-      label(field, label_text) + self.send(field_type, field)
+      field_type = options.delete(:as)
+      field_type ||= FIELD_MATCHERS.to_a.select { |matcher, type| matcher === field_name }.map { |_, type| type }.first
+
+      send("#{field_type}_field", field_name, options)
     end
   end
 end

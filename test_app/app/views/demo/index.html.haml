@@ -23,32 +23,28 @@
     %a(name="labels")
     %h2 Labels
     %p
-      = text_label "Standard Label"
-      = text_label "Radius Label", :radius
-      = text_label "Round Label", :round
+      = label_box "Standard Label"
+      = label_box "Radius Label", :radius
+      = label_box "Round Label", :round
     %p
-      = text_label "Alert Label", :alert
-      = text_label "Radius Success Label", :success, :radius
-      = text_label "Round Secondary Label", :secondary, :round
+      = label_box "Alert Label", :alert
+      = label_box "Radius Success Label", :success, :radius
+      = label_box "Round Secondary Label", :secondary, :round
 
     %a(name="forms")
     %h2 Forms
-
     = foundation_form_for :user do |f|
-      -# = f.label :username, "Your User Name"    
-      -# = f.text_field :username
+      = f.label :username
+      = f.text_field :username
 
-      = f.input :fullname, :label => "Full name!!"
+      = f.label :email
+      = f.field :email
 
       = f.input :password
       = f.input :password_confirmation
 
-      = f.input :email
-
-      = f.input :url
-
-      = f.input :blog, :as => :url
+      = f.input :blog_url, :label => "Blog URL"
 
       = f.input :mobile, :as => :phone
-
+    
       = f.button :submit

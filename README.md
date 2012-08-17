@@ -94,7 +94,7 @@ To start using the form builder, use the helper `foundation_form_for`.
 ```erb
 <%= foundation_form_for @user do |f| %>
   <%= f.input :username, :label => "Your name" %>
-  <%= f.input :address, :hint => "Where you live", :field => {:columns => 8} %>
+  <%= f.input :address, :field => {:columns => 8} %>
   <%= f.input :email, :as => :email, :placeholder => "you@example.com" %>
   <%= f.button :submit %>
 <% end %>
@@ -129,6 +129,12 @@ If you want to use Foundation forms, but need to separate the label and field, y
   <% end %>
 <% end %>
 ```
+
+### TODO
+
+* :field options on forms.
+* Inline inputs.
+* Form error states.
  
 
 ## Contributing

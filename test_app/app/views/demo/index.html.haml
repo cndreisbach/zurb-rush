@@ -6,6 +6,7 @@
       %li= link_to "Flash Messages", "#flash-messages"
       %li= link_to "Alert Boxes", "#alert-boxes"
       %li= link_to "Labels", "#labels"
+      %li= link_to "Forms", "#forms"
     
   = columns 8, :mobile => 3 do
     %a(name="flash-messages")
@@ -35,10 +36,9 @@
     %h2 Forms
     = foundation_form_for :user do |f|
       = f.label :username
-      = f.text_field :username
+      = f.field :username
 
-      = f.label :email
-      = f.field :email
+      = f.input :email, :placeholder => "you@example.com"
 
       = f.input :password
       = f.input :password_confirmation
@@ -46,5 +46,9 @@
       = f.input :blog_url, :label => "Blog URL"
 
       = f.input :mobile, :as => :phone
+
+      = f.input :search
+
+      = f.input :user_time_zone
     
       = f.button :submit
